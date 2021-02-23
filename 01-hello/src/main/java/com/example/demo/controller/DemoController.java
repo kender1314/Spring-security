@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DemoController {
 
     @ResponseBody
-    @GetMapping("hello")
+    @GetMapping("/hello")
     public String hello(){
         return "Hello Spring Security!";
     }
