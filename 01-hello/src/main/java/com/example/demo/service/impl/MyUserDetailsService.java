@@ -15,6 +15,7 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //也可以使用角色名进行登录
         List<GrantedAuthority> roles = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
         return new User("mary", new BCryptPasswordEncoder().encode("123"), roles);
     }
