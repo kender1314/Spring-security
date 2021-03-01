@@ -26,6 +26,9 @@ public class UsernamePasswordService extends UsernamePasswordAuthenticationFilte
     private AuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler();
 
 
+    /**
+     * 执行登陆操作，对登陆进行验证
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
@@ -43,6 +46,9 @@ public class UsernamePasswordService extends UsernamePasswordAuthenticationFilte
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
+    /**
+     * 登陆不成功执行什么
+     */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException failed) throws IOException, ServletException {
@@ -54,6 +60,9 @@ public class UsernamePasswordService extends UsernamePasswordAuthenticationFilte
         this.failureHandler.onAuthenticationFailure(request, response, failed);
     }
 
+    /**
+     * 登陆成功执行什么
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
