@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +27,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
         //也可以使用角色名进行登录
         List<GrantedAuthority> roles = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
-        return new User(userByUsername.getUsername(), new BCryptPasswordEncoder().encode(userByUsername.getPassword()), roles);
+        return new User(userByUsername.getUsername(), userByUsername.getPassword(), roles);
     }
 }

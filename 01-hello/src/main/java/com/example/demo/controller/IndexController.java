@@ -8,21 +8,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @Author jiang.he
  * @Version 1.0.0 RELEASE
- * @Date 2021/1/13 19:37
+ * @Date 2021/3/10 22:45
  */
 @Controller
-@RequestMapping("/demo")
-public class DemoController {
-
+@RequestMapping("/")
+public class IndexController {
     @ResponseBody
-    @GetMapping("/hello")
+    @GetMapping("/")
     public String hello(){
-        return "Hello Spring Security!";
-    }
-
-    @ResponseBody
-    @GetMapping("/unPermit")
-    public String unPermit(){
-        return "Un Permit!";
+        return "This is index page!";
     }
 }
