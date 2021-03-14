@@ -6,13 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.csrf.CsrfFilter;
 
 /**
  * 自定义编写实现类（继承UsernamePasswordAuthenticationFilter类，可以通过数据库进行认证）
@@ -28,11 +26,6 @@ public class SecurityConfigurationBySql extends WebSecurityConfigurerAdapter {
         super.configure(web);
         web.ignoring()
                 .antMatchers("/demo/**", "/dasd/**");
-    }
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(new MyFilter(), FilterSecurityInterceptor.class);
     }
 
     @Override
@@ -60,5 +53,6 @@ public class SecurityConfigurationBySql extends WebSecurityConfigurerAdapter {
                     .antMatchers("/permit/hello", "/permit/test").permitAll() //设置哪些路径可以直接访问，不需要认证
                 .anyRequest().authenticated()  //所有请求都被拦截
                 .and().csrf().disable();   //关闭csrf防护
+        http.addFilterBefore(new MyFilter(), FilterSecurityInterceptor.class);
     }
 }
